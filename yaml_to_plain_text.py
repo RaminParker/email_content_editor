@@ -12,9 +12,6 @@ def extract_clean_text(yaml_file):
             # Remove line continuation backslashes
             text = text.replace('\\\n', '')
             
-            # Convert Unicode escape sequences
-            text = text.encode('utf-8').decode('unicode_escape')
-            
             # Remove Markdown formatting
             text = re.sub(r'\[(.*?)\]\(.*?\)', r'\1', text)  # Remove links
             text = re.sub(r'\*(.+?)\*', r'\1', text)  # Remove asterisks
@@ -32,7 +29,11 @@ def extract_clean_text(yaml_file):
 
 
 if __name__ == "__main__":
-    clean_text = extract_clean_text('updated_signup.yaml')
-    with open('clean_text.txt', 'w', encoding='utf-8') as file:
-        file.write(clean_text)
+    email_list = ['updated_signup-waitlist.yaml', 'updated_signup-waitlist.yaml', 'updated_reminder.yaml',
+                  'updated_gewinspiel.yaml', 'updated_allocation-reminder.yaml', 'updated_allocation-ready.yaml',
+                  'updated_allocation-failed.yaml', 'updated_allocation-cancel-course.yaml', 'updated_activation.yaml']
+    for file in email_list:
+        clean_text = extract_clean_text(f'emails_updated/{file}')
+        with open(f'clean_{file}.txt', 'w', encoding='utf-8') as file:
+            file.write(clean_text)
 
