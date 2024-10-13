@@ -1,0 +1,6 @@
+name: email_content_editor
+dependencies:
+  - python==3.12
+  - streamlit
+  # - pip:
+  #   - k-means-constrained
